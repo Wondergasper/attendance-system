@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+    @apply bg-slate-100 dark:bg-slate-950;
+  }
+
+  #root {
+    width: 100%;
+  }
+
+  /* Smooth transitions for theme changes */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  /* Enhanced input styles with floating labels */
+  .input-group {
+    @apply relative;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-4 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-2xl 
+           text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500
+           focus:outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10
+           transition-all duration-300;
+  }
+
+  .input-icon {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 transition-colors;
+  }
+
+  .input-field:focus + .input-icon,
+  .input-field:focus ~ .input-icon {
+    @apply text-brand-500;
+  }
+
+  /* Premium button styles */
+  .btn-primary {
+    @apply w-full py-4 bg-gradient-to-r from-brand-600 to-brand-500 
+           hover:from-brand-700 hover:to-brand-600
+           text-white font-semibold rounded-2xl
+           shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40
+           transform hover:-translate-y-0.5 active:translate-y-0
+           transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply w-full py-4 bg-white dark:bg-slate-800 
+           border-2 border-slate-200 dark:border-slate-700
+           text-slate-700 dark:text-slate-300 font-semibold rounded-2xl
+           hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400
+           transform hover:-translate-y-0.5 active:translate-y-0
+           transition-all duration-300;
+  }
+
+  /* Card with depth */
+  .card {
+    @apply bg-white dark:bg-slate-900 rounded-3xl shadow-soft 
+           border border-slate-100 dark:border-slate-800;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl 
+           border border-white/20 dark:border-slate-700/50;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 to-accent-cyan bg-clip-text text-transparent;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  .dark .shimmer::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.slate.300') transparent;
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: theme('colors.slate.700') transparent;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Fingerprint circle styles */
+.fingerprint-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  user-select: none;
+}
+
+.fingerprint-circle:active {
+  transform: scale(0.95);
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.loading-ring {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3b82f6;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes laser {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scanner-laser {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #3b82f6, transparent);
+  box-shadow: 0 0 15px #3b82f6;
+  z-index: 20;
+  pointer-events: none;
+  animation: laser 2s infinite linear;
+}
