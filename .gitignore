@@ -1,0 +1,37 @@
+# General
+.DS_Store
+*.log
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+
+# React Frontend (atsf/)
+atsf/node_modules/
+atsf/dist/
+atsf/build/
+atsf/.eslintcache
+atsf/coverage/
+
+# Python Backend & ML (attendance-system backend/ & ml/)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+# (excluding attendance.db if you want it version controlled, otherwise it will be ignored by *.db)
+
+# ML Models
+# Un-comment the next line if you don't want to upload the trained model file to Git 
+# attendance_model.pkl
