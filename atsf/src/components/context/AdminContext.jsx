@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 const AdminContext = createContext(null);
-const API_URL = 'http://localhost:8000';
+const API_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
 
 export function AdminProvider({ children }) {
   const [admin, setAdmin]               = useState(null);

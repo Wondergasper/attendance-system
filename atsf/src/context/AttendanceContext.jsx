@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getDeviceFingerprint } from '../utils/device';
 
 const AttendanceContext = createContext();
-const API_URL = 'http://localhost:8000';
+const API_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
 
 export const AttendanceProvider = ({ children }) => {
   const [user, setUser] = useState(null);
